@@ -9,35 +9,35 @@ const isDev = require("../middleware/isDev");
 //todo:  since for now token time is 1h thus not adding refresh token middleware
 
 //Bug Routes
-router.post("/bug", authMiddleware.verifyToken, isDev, bugController.createBug);
-router.get("/bug", authMiddleware.verifyToken, isDev, bugController.getBugs);
+router.post("/", authMiddleware.verifyToken, isDev, bugController.createBug);
+router.get("/", authMiddleware.verifyToken, isDev, bugController.getBugs);
 router.get(
-  "/bug/:id",
+  "/:id",
   authMiddleware.verifyToken,
   isDev,
   bugController.getBugByID
 );
 router.put(
-  "/bug/:id",
+  "/:id",
   authMiddleware.verifyToken,
   isDev,
   bugController.updateBugByID
 );
 router.delete(
-  "/bug/:id",
+  "/:id",
   authMiddleware.verifyToken,
   onlyManager,
   bugController.deleteBugByID
 );
 
 router.put(
-  "/bug/assign/:id",
+  "/assign/:id",
   authMiddleware.verifyToken,
   onlyManager,
   bugController.assignBug
 );
 router.put(
-  "/bug/status/:id",
+  "/status/:id",
   authMiddleware.verifyToken,
   bugController.updateBugStatus
 );

@@ -7,14 +7,14 @@ const router = express.Router();
 
 //User Routes
 router.get(
-  "/users",
+  "/",
   authMiddleware.refreshToken,
   authMiddleware.verifyToken,
   onlyManager,
   userController.getUsers
 );
 router.put(
-  "/user/role/:id",
+  "/role/:id",
   authMiddleware.refreshToken,
   authMiddleware.verifyToken,
   onlyManager,

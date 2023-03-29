@@ -6,6 +6,7 @@ const express = require("express");
 const authRoutes = require("./src/routes/auth");
 const userRoutes = require("./src/routes/user");
 const bugRoutes = require("./src/routes/bug");
+const commentRoutes = require("./src/routes/comment");
 
 const errorController = require("./src/controllers/error");
 const configHeader = require("./src/utils/set-headers");
@@ -14,6 +15,7 @@ const Sequelize = require("sequelize");
 const cookieParser = require("cookie-parser");
 const User = require("./src/models/User");
 const Bug = require("./src/models/Bug");
+const Comment = require("./src/models/Comment");
 
 const server = express();
 
@@ -24,19 +26,25 @@ server.use(configHeader); // set Header for frontEnd/ preflight
 
 // Routes
 server.use("/api/v1", authRoutes);
-server.use("/api/v1", userRoutes);
-server.use("/api/v1", bugRoutes);
+server.use("/api/v1/user", userRoutes);
+server.use("/api/v1/bug", bugRoutes);
+server.use("/api/v1/comment", commentRoutes);
 
 // Un-registered Router handler
 server.use("/*", errorController.NotFound);
 
-// DB Associations
+// DB Associations //todo: add m:n association
+//Bug association
 User.hasMany(Bug, {
   foreignKey: {
     name: "_creator",
     type: Sequelize.DataTypes.UUID,
   },
 });
+
+// Comment association
+Comment.belongsTo(User);
+Bug.hasMany(Comment);
 
 // DB Configuration
 sequelize
