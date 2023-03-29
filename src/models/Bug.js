@@ -33,9 +33,6 @@ const bugSchemaDefinition = sequelize.define("Bug", {
   },
   assigned_to: {
     type: Sequelize.DataTypes.UUID,
-    validate: {
-      isUUID: true,
-    },
   },
 });
 

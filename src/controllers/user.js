@@ -22,7 +22,6 @@ exports.changeUserRole = (req, res, next) => {
   const { role } = req.body;
   User.update({ role: role }, { where: { id: id } })
     .then((response) => {
-      console.log("update Response: ", response);
       res.status(200).json({
         message: `User Role updated to ${role} Successfully`,
       });
