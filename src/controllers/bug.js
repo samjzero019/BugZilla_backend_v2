@@ -139,7 +139,6 @@ exports.assignBug = (req, res, next) => {
       error: "UserID not Found!",
     });
   }
-  console.log("userID: ", userID);
 
   User.findByPk(userID)
     .then((response) => {
